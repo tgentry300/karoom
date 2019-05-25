@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>My Appointments</h1>
+{% for apt in apts %}
+    <li><a href='/details/{{ apt.pk }}'>{{ apt.room }}</a></li>
+    <hr>
+{% endfor %}
+{% endblock %}

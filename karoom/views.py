@@ -22,7 +22,6 @@ def room_view(request):
 
         if form.is_valid():
             data = form.cleaned_data
-            # print(data)
 
             if data['has_tv'] == '1':
                 tv = True

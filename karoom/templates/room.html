@@ -5,12 +5,12 @@
 <h3>{{ room.name }}</h3>
 <h4>Floor {{ room.floor }}</h4>
 <p>This room contains {{ room.assets.asset_type }} with the name of {{ room.assets.asset_name }} and is accessible at {{ room.assets.url }}</p>
-<a href='/schedule'>Schedule this room(not sure if I'm gonna implement this)</a>
+<a href='/schedule/{{ room.pk }}'>Schedule this room</a>
 <hr>
 {% endfor %}
 <hr>
 {% if request.user.is_staff %}
-<h2>Add a new room</h2>
+<h2>Add a new room (Staff Only)</h2>
 {% include 'generic_form.html' %}
 {% endif %}
 {% endblock %}

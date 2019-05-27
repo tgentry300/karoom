@@ -21,6 +21,6 @@ class Room(models.Model):
 
 class Appointment(models.Model):
     time = models.DateTimeField(default=now)
-    duration = models.IntegerField(default=0.5)
+    duration = models.IntegerField(default=1)
     scheduler = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)

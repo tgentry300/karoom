@@ -25,6 +25,6 @@ urlpatterns = [
     path('newuser', views.new_user_view),
     path('logout', views.logout_view),
     path('myappointments', views.my_appointments, name='myappointments'),
-    path('schedule', views.new_appointment),
-    path('details/<int:aptid>', views.appointment_details)
+    path('schedule/<int:room_id>', views.new_appointment),
+    path('details/<int:apt_id>', views.appointment_details)
 ]

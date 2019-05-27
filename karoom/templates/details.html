@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Appointment Details</h2>
+<p>This appointment has been scheduled on {{ apt.time }} by {{ apt.scheduler }} in {{ apt.room.name }} for {{ apt.duration }} hours</p>
+{% endblock %}

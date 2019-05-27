@@ -3,11 +3,15 @@ from django.contrib.auth.models import User
 from .models import Room, RoomAsset, Appointment
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 from . import forms
 
 
 def home_view(request):
-    return render(request, 'home.html')
+    upcoming = Appointment.objects.all()
+    upcoming = upcoming.order_by('time')[:5]
+
+    return render(request, 'home.html', {'u_apts': upcoming})
 
 
 def room_view(request):
@@ -94,11 +98,12 @@ def logout_view(request):
 
 
 def appointment_details(request, apt_id):
-    pass
+    apt = Appointment.objects.get(id=apt_id)
+    return render(request, 'details.html', {'apt': apt})
 
 
 @login_required(login_url='/login')
-def new_appointment(request):
+def new_appointment(request, room_id):
     form = None
     if request.user.is_authenticated:
         logged_in_user = request.user
@@ -109,10 +114,14 @@ def new_appointment(request):
         if form.is_valid():
             data = form.cleaned_data
 
-            Appointment.objects.create(time=data['time'],
+            room = Room.objects.get(id=room_id)
+
+            new_date = datetime.combine(data['date'], data['time'])
+
+            Appointment.objects.create(time=new_date,
                                        duration=data['duration'],
                                        scheduler=logged_in_user,
-                                       room=data['room'])
+                                       room=room)
 
             return HttpResponseRedirect(reverse('myappointments'))
     else:

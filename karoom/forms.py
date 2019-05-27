@@ -1,5 +1,4 @@
 from django import forms
-from .models import Room
 
 
 user_status_choices = [('1', 'Staff'), ('2', 'Student')]
@@ -29,6 +28,6 @@ class NewRoomForm(forms.Form):
 
 
 class NewAppointmentForm(forms.Form):
-    time = forms.DateTimeField()
+    time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
+    date = forms.DateField()
     duration = forms.IntegerField(max_value=2)
-    room = forms.ModelChoiceField(queryset=Room.objects.all())

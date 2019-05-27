@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Welcome to Karoom, your Kenzie breakout room scheduler</h2>
-<p>The 5 upcoming appointments will go here</p>
+{% for apt in u_apts %}
+<p>Upcoming appointment on {{ apt.time }} by {{ apt.scheduler }} in {{ apt.room.name }} for {{ apt.duration }} hours</p>
+<hr>
+{% endfor %}
 {% endblock %}

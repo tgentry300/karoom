@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 
 user_status_choices = [('1', 'Staff'), ('2', 'Student')]
@@ -11,11 +12,10 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput())
 
 
-class CreateNewUserForm(forms.Form):
-    name = forms.CharField(max_length=30)
-    username = forms.CharField(max_length=20)
-    password = forms.CharField(widget=forms.PasswordInput())
-    status = forms.ChoiceField(required=True, choices=user_status_choices)
+class CreateNewUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'username', 'password', 'is_staff']
 
 
 class NewRoomForm(forms.Form):

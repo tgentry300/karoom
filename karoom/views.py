@@ -79,13 +79,13 @@ def new_user_view(request):
         if form.is_valid():
             data = form.cleaned_data
 
-            if data['status'] == '1':
-                User.objects.create_user(first_name=data['name'], username=data['username'],
-                                         password=data['password'], is_staff=True)
+            user = User.objects.create_user(first_name=data['first_name'], username=data['username'],
+                                            password=data['password'], is_staff=data['is_staff'])
 
-            elif data['status'] == '2':
-                User.objects.create_user(first_name=data['name'], username=data['username'],
-                                         password=data['password'], is_staff=False)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('home'))
+
     else:
         form = forms.CreateNewUserForm()
 

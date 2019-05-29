@@ -18,6 +18,9 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 from . import views, class_views
 
+handler404 = views.handler404
+handler500 = views.handler500
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),

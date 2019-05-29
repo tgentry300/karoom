@@ -105,12 +105,14 @@ class NewAppointmentView(View):
             data = form.cleaned_data
 
             room = Room.objects.get(id=room_id)
-
+            # maybe try to use timezone from django
             new_date = datetime.combine(data['date'], data['time'])
 
-            Appointment.objects.create(time=new_date,
-                                       duration=data['duration'],
-                                       scheduler=logged_in_user,
-                                       room=room)
+            Appointment.objects.create(
+                time=new_date,
+                duration=data['duration'],
+                scheduler=logged_in_user,
+                room=room
+            )
 
             return HttpResponseRedirect(reverse('myappointments'))

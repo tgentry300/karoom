@@ -2,7 +2,7 @@
 {% block content %}
 <h1>My Appointments</h1>
 {% for apt in apts %}
-    <li><a href='/details/{{ apt.pk }}'>{{ apt.room }}</a></li>
+    <p>You have an <a href='/details/{{ apt.pk }}'>appointment</a> in {{ apt.room }} scheduled for {{ apt.time }}</p>
     <hr>
 {% endfor %}
 {% endblock %}
